@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AuthButton from "@/components/auth-button";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,12 +14,15 @@ export default function WrappedLayout({
 }>) {
   return (
     <>
-      <header className="p-10">
-        <AuthButton />
+      <header className="w-full p-6">
+        <nav className="flex justify-between items-center">
+          <Link href="/wrapped" className="font-medium">
+            Spotify Wrapped
+          </Link>
+          <AuthButton />
+        </nav>
       </header>
-      <main className="h-full w-full flex justify-center items-center">
-        {children}
-      </main>
+      <main>{children}</main>
     </>
   );
 }
