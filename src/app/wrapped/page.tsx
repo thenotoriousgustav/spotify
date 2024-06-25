@@ -29,28 +29,30 @@ export default async function WrappedPage({
   const [profile, topItems] = await Promise.all([profileData, topItemsData]);
 
   return (
-    <section className="flex justify-center w-full">
-      <div className="flex gap-x-10">
-        <div className="w-96">
-          <Suspense fallback="loading">
-            {profile && <Profile profile={profile} />}
-          </Suspense>
-          <Suspense fallback="loading">
-            <div>
-              {type === "tracks" &&
-                (topItems as TTopTracks)?.items.map((track) => (
-                  <TopTracks track={track} key={track.id} />
-                ))}
+    <section className="px-4 lg:px-6">
+      <Suspense fallback="loading">
+        {profile && <Profile profile={profile} />}
+      </Suspense>
+      <div className="">
+        <div className="flex flex-col-reverse lg:flex-row lg:gap-x-10">
+          <div className="w-full lg:w-96">
+            <Suspense fallback="loading">
+              <div>
+                {type === "tracks" &&
+                  (topItems as TTopTracks)?.items.map((track) => (
+                    <TopTracks track={track} key={track.id} />
+                  ))}
 
-              {type === "artists" &&
-                (topItems as TTopArtist)?.items.map((artist) => (
-                  <TopArtists artist={artist} key={artist.id} />
-                ))}
-            </div>
-          </Suspense>
-        </div>
-        <div className="p-10">
-          <SelectData />
+                {type === "artists" &&
+                  (topItems as TTopArtist)?.items.map((artist) => (
+                    <TopArtists artist={artist} key={artist.id} />
+                  ))}
+              </div>
+            </Suspense>
+          </div>
+          <div className="py-6 lg:p-10">
+            <SelectData />
+          </div>
         </div>
       </div>
     </section>
